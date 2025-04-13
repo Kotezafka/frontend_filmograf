@@ -1,14 +1,14 @@
-function Navigation({ setCurrentPage }) {
-    return (
-      <div className="navigation">
-        <div>Компонент "Навигация". Включает кнопки для перехода между страницами</div>
-        <nav>
-          <button onClick={() => setCurrentPage('home')}>Главная</button>
-          <button onClick={() => setCurrentPage('favorites')}>Избранное</button>
-          <button onClick={() => setCurrentPage('add')}>Добавить фильм</button>
-        </nav>
+export default function Navigation() {
+  return (
+    <nav className="navigation">
+      <div className="description">
+        Компонент "Навигация". Позволяет переключаться между разделами приложения.
       </div>
-    )
-  }
-  
-  export default Navigation
+      <div className="nav-links">
+        <button className="active">Все фильмы</button>
+        <button>Избранное</button>
+        <button>Добавить фильм</button>
+      </div>
+    </nav>
+  );
+}
