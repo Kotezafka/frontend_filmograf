@@ -7,7 +7,7 @@ import './Home.css';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('all');
-  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [selectedGenre, setSelectedGenre] = useState(null);
   const [movies, setMovies] = useState(
     [{
       id: 1,
@@ -89,22 +89,27 @@ export default function Home() {
     ));
   };
 
-  const handleGenreFilter = (genres) => {
-    setSelectedGenres(genres);
-  };
-
-  const filteredMovies = selectedGenres.length > 0
-    ? movies.filter(movie => selectedGenres.includes(movie.genre))
-    : movies;
+  // Фильтрация по жанру и вкладке
+  const filteredMovies = movies.filter(movie => {
+    // Если выбрана вкладка "Избранное" и фильм не в избранном - исключаем
+    if (activeTab === 'favorites' && !movie.isFavorite) return false;
+    
+    // Если выбран жанр и он не совпадает - исключаем
+    if (selectedGenre && movie.genre !== selectedGenre) return false;
+    
+    return true;
+  });
 
   return (
     <div className="home-page">
-      <div className="header-container">
-        <PageHeader />
-        <GenreFilters onFilterChange={handleGenreFilter} />
-      </div>
-      
+      <PageHeader />
       <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
+      
+      {/* Добавляем GenreFilters с правильными пропсами */}
+      <GenreFilters 
+        activeGenre={selectedGenre}
+        onGenreChange={setSelectedGenre}
+      />
 
       <div className="movies-grid">
         {filteredMovies.map(movie => (
