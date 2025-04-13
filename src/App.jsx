@@ -23,8 +23,8 @@ function App() {
 
   return (
     <div className="app">
-      <PageHeader />
-      <Navigation setCurrentPage={setCurrentPage} />
+      {/* <PageHeader />
+      <Navigation setCurrentPage={setCurrentPage} /> */}
       {renderPage()}
     </div>
   )

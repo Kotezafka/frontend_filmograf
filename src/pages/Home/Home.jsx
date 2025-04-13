@@ -3,6 +3,7 @@ import MovieCard from '../../components/MovieCard/MovieCard';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import GenreFilters from '../../components/GenreFilters/GenreFilters';
 import Navigation from '../../components/Navigation/Navigation';
+import Footer from '../../components/Footer/Footer';
 import './Home.css';
 
 export default function Home() {
@@ -102,24 +103,29 @@ export default function Home() {
 
   return (
     <div className="home-page">
-      <PageHeader />
-      <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
-      
-      {/* Добавляем GenreFilters с правильными пропсами */}
-      <GenreFilters 
-        activeGenre={selectedGenre}
-        onGenreChange={setSelectedGenre}
-      />
-
-      <div className="movies-grid">
-        {filteredMovies.map(movie => (
-          <MovieCard 
-            key={movie.id}
-            movie={movie}
-            toggleFavorite={toggleFavorite}
-          />
-        ))}
+      <div className="main-content">
+        <div className="left-navigation">
+          <PageHeader />
+          <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
+        </div>
+        
+        <GenreFilters 
+          activeGenre={selectedGenre}
+          onGenreChange={setSelectedGenre}
+        />
+  
+        <div className="movies-grid">
+          {filteredMovies.map(movie => (
+            <MovieCard 
+              key={movie.id}
+              movie={movie}
+              toggleFavorite={toggleFavorite}
+            />
+          ))}
+        </div>
       </div>
+      
+      <Footer />
     </div>
   );
 }

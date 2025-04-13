@@ -1,9 +1,3 @@
-.home-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 32px;
-}
-
 .page-title {
   font-size: 43px;
   font-weight: 700;
@@ -16,3 +10,15 @@
   gap: 24px;
 }
 
+.home-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Занимаем всю высоту экрана */
+}
+
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px;
+  flex: 1; /* Растягиваем контент, чтобы футер был внизу */
+}
