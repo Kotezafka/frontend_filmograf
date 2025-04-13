@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import MovieCard from '../../components/MovieCard/MovieCard';
+import PageHeader from '../../components/PageHeader/PageHeader';
+import GenreFilters from '../../components/GenreFilters/GenreFilters';
 import Navigation from '../../components/Navigation/Navigation';
-import Header from '../../components/Header/Header';
 import './Home.css';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('all');
-    const [selectedGenres, setSelectedGenres] = useState([]);
-
-  const [movies, setMovies] = useState([
-    {
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [movies, setMovies] = useState(
+    [{
       id: 1,
       title: 'Матрица',
       genre: 'Боевик',
@@ -89,43 +89,25 @@ export default function Home() {
     ));
   };
 
+  const handleGenreFilter = (genres) => {
+    setSelectedGenres(genres);
+  };
+
+  const filteredMovies = selectedGenres.length > 0
+    ? movies.filter(movie => selectedGenres.includes(movie.genre))
+    : movies;
+
   return (
     <div className="home-page">
-      <div className="films-nav">
-          <button 
-            className={`nav-btn ${activeTab === 'all' ? 'active' : ''}`}
-            onClick={() => setActiveTab('all')}
-          >
-            Все фильмы
-          </button>
-          <button 
-            className={`nav-btn ${activeTab === 'favorites' ? 'active' : ''}`}
-            onClick={() => setActiveTab('favorites')}
-          >
-            Избранное
-          </button>
-          <button 
-            className={`nav-btn ${activeTab === 'add' ? 'active' : ''}`}
-            onClick={() => setActiveTab('add')}
-          >
-            Добавить фильм
-          </button>
-        </div>
-      {/* Заголовок и навигация */}
-      <div className="header-section">
-        <h1 className="main-title">Фильмы</h1>
-
-      <div className="genre-filters">
-          <span className="genre-tag">Боевик</span>
-          <span className="genre-tag">Триллер</span>
-          <span className="genre-tag">Комедия</span>
-          <span className="genre-tag">Драма</span>
-        </div>
+      <div className="header-container">
+        <PageHeader />
+        <GenreFilters onFilterChange={handleGenreFilter} />
       </div>
+      
+      <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
 
-      {/* Сетка фильмов */}
       <div className="movies-grid">
-        {movies.map(movie => (
+        {filteredMovies.map(movie => (
           <MovieCard 
             key={movie.id}
             movie={movie}

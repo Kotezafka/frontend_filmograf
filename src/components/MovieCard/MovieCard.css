@@ -1,0 +1,130 @@
+.movie-card {
+    width: 100%;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.poster-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.movie-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.movie-card:hover .overlay {
+    opacity: 1;
+}
+
+.movie-info {
+    padding: 16px;
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-info h3 {
+    margin: 0 0 12px 0;
+    font-size: 22px;
+    font-weight: 600;
+    color: #313131;
+    text-align: left;
+    width: 100%;
+}
+
+.movie-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end; /* Выравниваем элементы по нижнему краю */
+    margin-top: auto;
+    position: relative;
+    padding-top: 12px;
+}
+
+.movie-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-top: auto;
+    padding-top: 12px;
+}
+
+.genre-tag {
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: auto; /* Жанр прижимается влево */
+}
+
+.duration {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #666;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.favorite-btn {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0;
+    padding: 0; /* Добавляем, чтобы убрать возможные отступы */
+    outline: none; /* Убираем стандартный outline */
+    -webkit-tap-highlight-color: transparent; /* Для мобильных устройств */
+}
+
+.favorite-btn.active {
+    color: #FFA500;
+    text-shadow: 0 0 8px rgba(255,165,0,0.5);
+    outline: none; /* Убедимся, что в активном состоянии тоже нет контура */
+}
+
+/* Убираем контур при фокусе для доступности */
+.favorite-btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.movie-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.movie-card:hover .movie-poster {
+    transform: scale(1.05);
+}
