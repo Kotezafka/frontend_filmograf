@@ -18,23 +18,39 @@ If you are developing a production application, we recommend using TypeScript an
         ├── src/
         │   ├── assets/
         │   ├── components/
-        │   │   ├── Header/
-        │   │   │   └── Header.jsx
+        │   │   ├── Footer/
+        │   │   │   ├── Footer.css
+        │   │   │   └── Footer.jsx
+        │   │   ├── GenreFilters/
+        │   │   │   ├── GenreFilters.css
+        │   │   │   └── GenreFilters.jsx
         │   │   ├── MovieCard/
+        │   │   │   ├── MovieCard.css
         │   │   │   └── MovieCard.jsx
-        │   │   ├── SearchBar/
-        │   │   │   └── SearchBar.jsx
-        │   │   └── Navigation/
-        │   │       └── Navigation.jsx
+        │   │   ├── Navigation/
+        │   │   │   ├── Navigation.css
+        │   │   │   └── Navigation.jsx
+        │   │   └── PageHeader/
+        │   │       ├── PageHeader.css
+        │   │       └── PageHeader.jsx
         │   ├── pages/
-        │   │   ├── Home/
-        │   │   │   └── Home.jsx
+        │   │   ├── AddMovie/
+        │   │   │   └── AddMovie.jsx
         │   │   ├── Favorites/
+        │   │   │   ├── Favorites.css
         │   │   │   └── Favorites.jsx
-        │   │   ├── Movie/
-        │   │   │   └── Movie.jsx
-        │   │   └── AddMovie/
-        │   │       └── AddMovie.jsx
+        │   │   ├── Home/
+        │   │   │   ├── Home.css
+        │   │   │   └── Home.jsx
+        │   │   └── Movie/
+        │   │       └── Movie.jsx
+        │   ├── store/
+        │   │   ├── actions/
+        │   │   │   └── favoritesActions.js
+        │   │   ├── reducers/
+        │   │   │   ├── favoritesReducer.js
+        │   │   │   └── index.js
+        │   │   └── index.js     
         │   ├── App.css
         │   ├── App.jsx
         │   ├── index.css
@@ -46,4 +62,3 @@ If you are developing a production application, we recommend using TypeScript an
         ├── package.json
         ├── README.md
         └── vite.config.js
-
