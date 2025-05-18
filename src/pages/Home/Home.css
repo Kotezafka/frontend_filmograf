@@ -13,12 +13,12 @@
 .home-page {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Занимаем всю высоту экрана */
+  min-height: 100vh;
 }
 
 .main-content {
   max-width: 1200px;
   margin: 0 auto;
   padding: 32px;
-  flex: 1; /* Растягиваем контент, чтобы футер был внизу */
+  flex: 1;
 }

@@ -1,21 +1,22 @@
 .genre-filters {
     display: flex;
-    justify-content: flex-end;
-    gap: 16px;
-    margin: 16px 0;
-    padding: 8px 0;
+    gap: 28px;
+    margin-bottom: 24px;
 }
 
 .genre-filter {
     display: flex;
     align-items: center;
     gap: 8px;
-    cursor: pointer;
     background: none;
     border: none;
-    padding: 6px 12px;
-    border-radius: 16px;
-    transition: all 0.2s ease;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: #222;
+    padding: 0 16px 0 0;
+    transition: color 0.2s;
 }
 
 .genre-filter:hover {
@@ -34,10 +35,29 @@
     border: 1px solid var(--border-color);
 }
 
+.genre-circle {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 4px;
+    position: relative;
+}
+
+.genre-circle svg {
+    display: block;
+}
+
 .genre-name {
-    font-size: 14px;
+    color: #222;
+    font-size: 16px;
     font-weight: 500;
-    color: var(--text-color);
+}
+
+.genre-filter.active .genre-name {
+    font-weight: 700;
 }
 
 .genre-filter:not(.active) .genre-name {

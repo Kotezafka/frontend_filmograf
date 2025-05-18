@@ -1,27 +1,28 @@
+import { NavLink } from 'react-router-dom';
 import './Navigation.css';
 
-
-export default function Navigation({ activeTab, onTabChange }) {
+export default function Navigation() {
   return (
     <div className="tabs-container">
-      <button 
-        className={`tab ${activeTab === 'all' ? 'active' : ''}`}
-        onClick={() => onTabChange('all')}
+      <NavLink 
+        to="/"
+        className={({ isActive }) => `tab ${isActive ? 'active' : ''}`}
+        end
       >
         Все фильмы
-      </button>
-      <button 
-        className={`tab ${activeTab === 'favorites' ? 'active' : ''}`}
-        onClick={() => onTabChange('favorites')}
+      </NavLink>
+      <NavLink 
+        to="/favorites"
+        className={({ isActive }) => `tab ${isActive ? 'active' : ''}`}
       >
         Избранное
-      </button>
-      <button 
-        className={`tab ${activeTab === 'add' ? 'active' : ''}`}
-        onClick={() => onTabChange('add')}
+      </NavLink>
+      <NavLink 
+        to="/add"
+        className={({ isActive }) => `tab ${isActive ? 'active' : ''}`}
       >
         Добавить фильм
-      </button>
+      </NavLink>
     </div>
   );
 }

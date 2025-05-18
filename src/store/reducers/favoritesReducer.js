@@ -5,7 +5,6 @@ const initialState = {
   const favoritesReducer = (state = initialState, action) => {
     switch (action.type) {
       case 'ADD_TO_FAVORITES':
-        // Проверяем, нет ли уже этого фильма в избранном
         if (state.favorites.some(movie => movie.id === action.payload.id)) {
           return state;
         }

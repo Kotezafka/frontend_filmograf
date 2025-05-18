@@ -1,10 +1,9 @@
 import { combineReducers } from 'redux';
-import favoritesReducer from './favoritesReducer'; // Импорт редьюсера для избранного
+import favoritesReducer from './favoritesReducer';
 
-// Объединение всех редьюсеров
+
 const rootReducer = combineReducers({
   favorites: favoritesReducer,
-  // Другие редьюсеры (если есть)
 });
 
 export default rootReducer;

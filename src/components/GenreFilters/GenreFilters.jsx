@@ -1,32 +1,35 @@
 import './GenreFilters.css';
 
 const genreColors = {
-  'Боевик': { bg: 'rgba(255, 77, 79, 0.2)', text: '#ff4d4f' },
-  'Триллер': { bg: 'rgba(114, 46, 209, 0.2)', text: '#722ed1' },
-  'Комедия': { bg: 'rgba(250, 173, 20, 0.2)', text: '#faad14' },
-  'Драма': { bg: 'rgba(19, 194, 194, 0.2)', text: '#13c2c2' }
+  'Боевик': { bg: '#ff4d4f' },
+  'Триллер': { bg: '#27ae60' },
+  'Комедия': { bg: '#296be7' },
+  'Драма': { bg: '#111' }
 };
 
-export default function GenreFilters({ activeGenre, onGenreChange }) {
+export default function GenreFilters({ activeGenres = [], onGenreChange }) {
   const handleGenreClick = (genre) => {
-    // Если жанр уже выбран - сбросить фильтр, иначе выбрать
-    onGenreChange(activeGenre === genre ? null : genre);
+    const newGenres = activeGenres.includes(genre)
+      ? activeGenres.filter(g => g !== genre)
+      : [...activeGenres, genre];
+    onGenreChange(newGenres);
   };
 
   return (
     <div className="genre-filters">
-      {Object.entries(genreColors).map(([genre, colors]) => (
+      {Object.entries(genreColors).map(([genre, { bg }]) => (
         <button
           key={genre}
-          className={`genre-filter ${activeGenre === genre ? 'active' : ''}`}
+          className={`genre-filter ${activeGenres.includes(genre) ? 'active' : ''}`}
           onClick={() => handleGenreClick(genre)}
-          style={{
-            '--bg-color': colors.bg,
-            '--text-color': colors.text,
-            '--border-color': colors.text
-          }}
         >
-          <div className="genre-color" />
+          <span className="genre-circle" style={{ background: bg }}>
+            {activeGenres.includes(genre) && (
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 7.5L6 10.5L11 4.5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            )}
+          </span>
           <span className="genre-name">{genre}</span>
         </button>
       ))}
