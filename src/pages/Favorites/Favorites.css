@@ -1,6 +1,7 @@
 .favorites-page {
-  max-width: 600px;
-  margin: 40px auto 0 auto;
+  width: 100%;
+  max-width: none;
+  margin: 40px 0;
   background: #fff;
   border-radius: 20px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.07);
