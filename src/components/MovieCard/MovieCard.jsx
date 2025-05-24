@@ -3,26 +3,42 @@ import { Link } from 'react-router-dom';
 import './MovieCard.css';
 
 const genreColors = {
-  'Боевик': { bg: 'rgba(255, 77, 79, 0.2)', text: '#ff4d4f' },
-  'Триллер': { bg: 'rgba(114, 46, 209, 0.2)', text: '#722ed1' },
-  'Комедия': { bg: 'rgba(250, 173, 20, 0.2)', text: '#faad14' },
-  'Драма': { bg: 'rgba(19, 194, 194, 0.2)', text: '#13c2c2' }
+  'Боевик': { bg: 'rgba(234,146,99,0.12)', text: '#E26C2D' },
+  'Триллер': { bg: 'rgba(73,182,78,0.12)', text: '#49B64E' },
+  'Комедия': { bg: 'rgba(135,117,210,0.12)', text: '#8775D2' },
+  'Драма': { bg: 'rgba(149,143,143,0.12)', text: '#958F8F' },
 };
 
 function StarIcon({ active }) {
   return active ? (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="#FFB800" stroke="#FFB800" strokeWidth="2" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="14,3 17.7,10.6 26,11.5 19.8,17.1 21.6,25.2 14,21.1 6.4,25.2 8.2,17.1 2,11.5 10.3,10.6" />
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="#F9A62B" stroke="#F9A62B" strokeWidth="2" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
     </svg>
   ) : (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#C4C4C4" strokeWidth="2" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="14,3 17.7,10.6 26,11.5 19.8,17.1 21.6,25.2 14,21.1 6.4,25.2 8.2,17.1 2,11.5 10.3,10.6" />
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F9A62B" strokeWidth="2" xmlns="http://www.w3.org/2000/svg">
+       <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
     </svg>
   );
 }
 
+function ClockIcon() {
+    return (
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="8" cy="8" r="7" stroke="#000" strokeWidth="1" fill="none" />
+            <path d="M8 4.5V8L10.5 9.5" stroke="#000" strokeWidth="1" strokeLinecap="round" />
+        </svg>
+    );
+}
+
 export default function MovieCard({ movie, toggleFavorite }) {
   const [isHovered, setIsHovered] = useState(false);
+
+  let currentDurationStr = String(movie.duration || '').trim();
+  const displayDuration = currentDurationStr.includes('мин') || currentDurationStr === ''
+    ? currentDurationStr
+    : `${currentDurationStr} мин.`;
+
+  const movieGenres = Array.isArray(movie.genres) ? movie.genres : (movie.genre ? [movie.genre] : []);
 
   return (
     <div 
@@ -43,32 +59,46 @@ export default function MovieCard({ movie, toggleFavorite }) {
           <h3>{movie.title}</h3>
           <div className="movie-meta">
             <div className="genre-tags">
-              {(Array.isArray(movie.genres) ? movie.genres : []).map(genre => (
-                <span 
+              {movieGenres.map(genre => (
+                <span
                   key={genre}
                   className="genre-tag"
                   style={{
                     backgroundColor: genreColors[genre]?.bg,
-                    color: genreColors[genre]?.text
+                    color: genreColors[genre]?.text,
+                    borderRadius: '24px',
+                    padding: '4px 12px',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    lineHeight: '17px',
+                    marginRight: '8px',
                   }}
                 >
                   {genre}
                 </span>
               ))}
             </div>
-            <span className="duration">🕒 {movie.duration}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexGrow: 1, justifyContent: 'center' }}>
+              <ClockIcon />
+              {displayDuration && (
+                <span className="duration" style={{ fontSize: '14px', color: '#000', fontWeight: '400' }}>{displayDuration}</span>
+              )}
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div 
+                 style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+                 onClick={(e) => {
+                   e.preventDefault();
+                   e.stopPropagation();
+                   toggleFavorite();
+                 }}
+              >
+                 <StarIcon active={movie.isFavourite} />
+              </div>
+            </div>
           </div>
         </div>
       </Link>
-      <button 
-        className={`favorite-btn ${movie.isFavourite ? 'active' : ''}`}
-        onClick={(e) => {
-          e.preventDefault();
-          toggleFavorite();
-        }}
-      >
-        <StarIcon active={movie.isFavourite} />
-      </button>
     </div>
   );
 }
